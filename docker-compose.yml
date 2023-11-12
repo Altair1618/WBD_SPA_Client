@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  wbd-spa-client:
+    container_name: wbd-spa-client
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
