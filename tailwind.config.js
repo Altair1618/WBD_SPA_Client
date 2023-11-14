@@ -71,6 +71,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    fontFamily: {
+      'poppins': ['Poppins'],
+    },
   },
   plugins: [require("tailwindcss-animate")],
 }

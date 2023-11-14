@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button"
+import { RouterProvider } from "react-router-dom";
+import { router } from "@/lib/routes";
 
 function App() {
   return (
-    <Button>Ini Tombol</Button>
+    <RouterProvider router={router} />
   )
 }
 

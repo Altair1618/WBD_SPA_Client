@@ -5,6 +5,8 @@ services:
     container_name: wbd-spa-client
     build:
       dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - 3000:3000
     volumes:
