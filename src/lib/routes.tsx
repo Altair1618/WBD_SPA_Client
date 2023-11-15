@@ -10,6 +10,8 @@ import { Register } from "@/pages/register/register";
 import { Subscriptions } from "@/pages/subscriptions/subscriptions";
 import { Test } from "@/pages/test/test";
 import { Home } from "@/pages/home/home";
+import { ProtectedRoute } from "@/components/route/protectedRoute";
+import { UserTypes } from "./userTypes";
 
 export const router = createBrowserRouter([
   {
@@ -22,43 +24,65 @@ export const router = createBrowserRouter([
     element: <Test />,
   },
   {
-    // TODO: Halaman Login
     path: '/login',
     element: <Login />,
   },
   {
-    // TODO: Halaman Register
     path: '/register',
     element: <Register />,
   },
   {
     // TODO: Halaman List Subscription Request bagi User (Admin Only)
     path: '/subscriptions',
-    element: <Subscriptions />,
+    element: (
+      <ProtectedRoute role={UserTypes.admin}>
+        <Subscriptions />
+      </ProtectedRoute>
+    ),
   },
   {
     // TODO: Halaman List Register Approval Request bagi Pengajar (Admin Only)
     path: '/approvals',
-    element: <Approvals />,
+    element: (
+      <ProtectedRoute role={UserTypes.admin}>
+        <Approvals />
+      </ProtectedRoute>
+    ),
   },
   {
     // TODO: Halaman List Course Premium yang dibuat dan Tombol Create, Edit, Delete (Pengajar Only)
     path: '/courses',
-    element: <Courses />,
+    element: (
+      <ProtectedRoute role={UserTypes.pengajar}>
+        <Courses />
+      </ProtectedRoute>
+    ),
   },
   {
     // TODO: Halaman List Enrolled Student dan Tombol Beri Sertifikat (Pengajar Only) 
     path: '/courses/:id',
-    element: <Course />,
+    element: (
+      <ProtectedRoute role={UserTypes.pengajar}>
+        <Course />
+      </ProtectedRoute>
+    ),
   },
   {
     // TODO: Halaman Form Create Course (Pengajar Only)
     path: '/courses/create',
-    element: <CreateCourse />,
+    element: (
+      <ProtectedRoute role={UserTypes.pengajar}>
+        <CreateCourse />
+      </ProtectedRoute>
+    ),
   },
   {
     // TODO: Halaman Form Edit Course (Pengajar Only)
     path: '/courses/:id/edit',
-    element: <EditCourse />,
+    element: (
+      <ProtectedRoute role={UserTypes.pengajar}>
+        <EditCourse />
+      </ProtectedRoute>
+    ),
   }
 ]);

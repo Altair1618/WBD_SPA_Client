@@ -11,7 +11,7 @@ export function Brand(props: Props) {
     brandClassName = "text-4xl font-bold text-blue-600 leading-none";
     premiumClassName = "text-[12px] font-bold text-purple-900 leading-none";
   } else {
-    brandClassName = "text-3xl font-bold text-blue-600 leading-none";
+    brandClassName = "text-2xl font-bold text-blue-600 leading-none";
     premiumClassName = "text-[10px] font-bold text-purple-900 leading-none";
   }
 

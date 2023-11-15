@@ -1,7 +1,10 @@
+import { Navbar } from "@/components/navbar/navbar";
+import { UserTypes } from "@/lib/userTypes";
+
 export function Subscriptions() {
   return (
-    <div>
-      <h1>Subscriptions Page</h1>
-    </div>
+    <>
+      <Navbar role={UserTypes.admin} />
+    </>
   );
 }

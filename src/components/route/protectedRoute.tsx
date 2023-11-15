@@ -3,24 +3,23 @@ import { UserTypes } from "@/lib/userTypes";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface PrivateRouteProps {
+interface ProtectedRouteProps {
   role: UserTypes;
   children: JSX.Element;
 };
 
-export function PrivateRoute(props: PrivateRouteProps) {
+export function ProtectedRoute(props: ProtectedRouteProps) {
   const navigate = useNavigate();
-  
-  if (!isAuthenticated()) {
-    navigate("/login");
-    return;
-  }
-
   const token = getToken();
 
-  const fetchData = async () => {
+  const auth = async () => {
+    if (!isAuthenticated()) {
+      navigate("/login");
+      return;
+    }
+  
     try {
-      const response = await fetch(`${process.env.REST_SERVICE}/self`, {
+      const response = await fetch(`${import.meta.env.VITE_REST_SERVICE}/self`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +35,7 @@ export function PrivateRoute(props: PrivateRouteProps) {
       }
 
       data = data['data'];
-      if (data['role'] !== props.role) {
+      if (data['user']['tipe'] !== props.role) {
         navigate("/login");
         return;
       }
@@ -48,7 +47,7 @@ export function PrivateRoute(props: PrivateRouteProps) {
   }
 
   useEffect(() => {
-    fetchData();
+    auth();
   }, []);
 
   return props.children;
