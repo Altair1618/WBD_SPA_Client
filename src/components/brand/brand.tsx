@@ -8,11 +8,11 @@ interface Props {
 export function Brand(props: Props) {
   let brandClassName, premiumClassName;
   if (props.size === "large") {
-    brandClassName = "text-4xl font-bold text-blue-600";
-    premiumClassName = "text-[12px] font-bold text-purple-900";
+    brandClassName = "text-4xl font-bold text-blue-600 leading-none";
+    premiumClassName = "text-[12px] font-bold text-purple-900 leading-none";
   } else {
-    brandClassName = "text-3xl font-bold text-blue-600";
-    premiumClassName = "text-[10px] font-bold text-purple-900";
+    brandClassName = "text-3xl font-bold text-blue-600 leading-none";
+    premiumClassName = "text-[10px] font-bold text-purple-900 leading-none";
   }
 
   if (props.clickable) {

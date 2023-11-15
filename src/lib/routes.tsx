@@ -9,8 +9,13 @@ import { Login } from "@/pages/login/login";
 import { Register } from "@/pages/register/register";
 import { Subscriptions } from "@/pages/subscriptions/subscriptions";
 import { Test } from "@/pages/test/test";
+import { Home } from "@/pages/home/home";
 
 export const router = createBrowserRouter([
+  {
+    path: '/',    
+    element: <Home />,
+  },
   {
     // TODO: Delete This Route if Project is Done
     path: '/test',
