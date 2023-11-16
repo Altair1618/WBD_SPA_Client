@@ -107,7 +107,7 @@ export function Subscriptions() {
       <div className="w-full h-full mt-16 px-5 py-3 flex flex-col items-start gap-3 flex-1 self-stretch">
         <p className="text-xs">Subscriptions</p>
         <SearchBar placeholder="Ketikkan username" onChange={(term) => setSearch(term)}></SearchBar>
-        <div className="flex flex-col items-start justify-between flex-1 self-stretch">
+        <div className="flex flex-col items-start justify-between flex-1 self-stretch bg-white px-5 py-8 rounded-lg">
           <ActionTable data={tableData} headers={headers} renderActions={renderActions} />
           <PaginationController currentPage={page} totalPages={totalPages} onPageChange={(p) => setPage(p)}></PaginationController>
         </div>
