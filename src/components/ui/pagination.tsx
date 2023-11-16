@@ -56,7 +56,7 @@ const PaginationController: React.FC<PaginationControllerProps> = ({
   };
 
   return (
-    <div className={`${totalPages < 1 ? "hidden" : "flex"} justify-center mb-5 w-full gap-2`}>
+    <div className={`${totalPages < 1 ? "hidden" : "flex"} justify-center w-full gap-2`}>
       {/* First Page Button */}
       <button
         className="px-2 bg-gray-400 text-white min-w-[35px] rounded-md"

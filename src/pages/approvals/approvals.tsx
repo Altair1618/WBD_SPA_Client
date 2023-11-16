@@ -7,48 +7,50 @@ import { UserTypes } from "@/lib/userTypes";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-function approve(id: string) {
-  fetch(`${import.meta.env.VITE_REST_SERVICE}/user/accept/${id}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
-    }
-  }).then((res) => res.json())
-    .then((res) => {
-      if (res.status === "success") {
-        toast.success(res.message);
-      } else {
-        toast.error(res.message);
-      }
-    }).catch((error) => {
-      toast.error(error);
-    });
-}
-
-function reject(id: string) {
-  fetch(`${import.meta.env.VITE_REST_SERVICE}/user/reject/${id}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
-    }
-  }).then((res) => res.json())
-    .then((res) => {
-      if (res.status === "success") {
-        toast.success(res.message);
-      } else {
-        toast.error(res.message);
-      }
-    }).catch((error) => {
-      toast.error(error);
-    });
-}
-
 export function Approvals() {
   const [tableData, setTableData] = useState<Record<string, any>[]>([]);
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const [totalPage, setTotalPage] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const [refreshKey, setRefreshKey] = useState<number>(0);
+
+  const approve = (id: string) => {
+    fetch(`${import.meta.env.VITE_REST_SERVICE}/user/accept/${id}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => res.json())
+      .then((res) => {
+        if (res.status === "success") {
+          toast.success(res.message);
+          setRefreshKey(refreshKey + 1);
+        } else {
+          toast.error(res.message);
+        }
+      }).catch((error) => {
+        toast.error(error);
+      });
+  };
+
+  const reject = (id: string) => {
+    fetch(`${import.meta.env.VITE_REST_SERVICE}/user/reject/${id}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then((res) => res.json())
+      .then((res) => {
+        if (res.status === "success") {
+          toast.success(res.message);
+          setRefreshKey(refreshKey + 1);
+        } else {
+          toast.error(res.message);
+        }
+      }).catch((error) => {
+        toast.error(error);
+      });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +65,7 @@ export function Approvals() {
           }
         });
         const result = await response.json();
-        setTotalPage(result.data.maxPage);
+        setTotalPages(result.data.maxPage);
         setTableData(result.data.users);
       } catch (error) {
         console.error(error);
@@ -80,7 +82,6 @@ export function Approvals() {
         className="flex w-8 h-8 p-1 justify-center items-center flex-shrink-0 bg-green-500 rounded-xl"
         onClick={() => {
           approve(rowData.id);
-          setRefreshKey(key => key + 1);
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
@@ -91,7 +92,6 @@ export function Approvals() {
         className="flex w-8 h-8 p-1 justify-center items-center flex-shrink-0 bg-red-500 rounded-xl"
         onClick={() => {
           reject(rowData.id);
-          setRefreshKey(key => key + 1);
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -107,9 +107,9 @@ export function Approvals() {
       <div className="w-full h-full mt-16 px-5 py-3 flex flex-col items-start gap-3 flex-1 self-stretch">
         <p className="text-xs">Approvals</p>
         <SearchBar placeholder="Ketikkan username" onChange={(term) => setSearch(term)}></SearchBar>
-        <div className="flex flex-col items-start justify-between flex-1 self-stretch">
+        <div className="flex flex-col items-start justify-between flex-1 self-stretch bg-white px-5 py-8 rounded-lg">
           <ActionTable data={tableData} headers={headers} renderActions={renderActions} />
-          <PaginationController currentPage={page} totalPages={totalPage} onPageChange={(p) => setPage(p)}></PaginationController>
+          <PaginationController currentPage={page} totalPages={totalPages} onPageChange={(p) => setPage(p)}></PaginationController>
         </div>
       </div>
     </>

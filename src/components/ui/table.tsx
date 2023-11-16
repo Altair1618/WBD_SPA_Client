@@ -15,7 +15,7 @@ const ActionTable: React.FC<ActionTableProps> = ({ data, headers, renderActions 
   const displayHeaders = headers && Object.keys(headers).length <= dataHeaders.length ? Object.keys(headers) : dataHeaders;
 
   return (
-    <table className="border-collapse w-full">
+    <table className="border-collapse w-full outline outline-gray-200 outline-1 rounded-[20px] overflow-hidden">
       <thead>
         <tr>
           {displayHeaders.map((header, index) => (
@@ -35,7 +35,7 @@ const ActionTable: React.FC<ActionTableProps> = ({ data, headers, renderActions 
             {displayHeaders.map((header, colIndex) => (
               <td
                 key={colIndex}
-                className={`border p-2 ${colIndex === 1 ? 'whitespace-nowrap w-full' : ''}`}
+                className={`border p-2 ${colIndex === 1 ? 'whitespace-nowrap w-full overflow-ellipsis' : ''}`}
               >
                 {row[header]}
               </td>
