@@ -58,7 +58,7 @@ export function Course() {
     fetchData();
   }, [page, search]);
 
-  const headers = { id: "Username", username: "Email" };
+  const headers = { username: "Username", email: "Email" };
   const renderActions = (rowData: Record<string, any>) => (
     <div className="flex px-3 py-1 items-center gap-3">
       <Button
