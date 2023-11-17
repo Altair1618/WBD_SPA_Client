@@ -48,7 +48,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ kode, name, id, onAction }) => 
           <div className='flex pt-4 justify-center items-center gap-4 self-stretch'>
             <Button
               className='flex px-4 py-1 flex-col justify-center items-end gap-3 rounded-lg bg-blue-500 text-white font-bold text-[10px]'
-              onClick={(_) => navigate(`/courses/${id}`)
+              onClick={(_) => {
+                localStorage.setItem("courseId", id);
+                navigate(`/courses/${id}`);
+              }
               }>
               LIHAT
             </Button>

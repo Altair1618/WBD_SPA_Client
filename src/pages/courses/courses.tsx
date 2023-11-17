@@ -29,8 +29,10 @@ export function Courses() {
           }
         });
         const result = await response.json();
-        setTotalPages(result.data.total_page);
+        console.log(result);
+
         setCoursesData(result.data.courses);
+        setTotalPages(Math.ceil(result.data.courses.length / 10));
       } catch (error) {
         console.error(error);
         return;
@@ -54,10 +56,10 @@ export function Courses() {
           {coursesData.length < 1
             ? <p className='w-full text-center mt-4'>Tidak ada data mata kuliah</p>
             : coursesData.map((course) => (
-              <CourseCard kode={course.kode} name={course.nama} id={course.id} onAction={() => setRefreshKey(refreshKey + 1)}></CourseCard>
+              <CourseCard key={course.kode} kode={course.kode} name={course.nama} id={course.id} onAction={() => setRefreshKey(refreshKey + 1)}></CourseCard>
             ))}
         </div>
-        <PaginationController currentPage={page} totalPages={Math.ceil(coursesData.length / 10)} onPageChange={(p) => setPage(p)}></PaginationController>
+        <PaginationController currentPage={page} totalPages={totalPages} onPageChange={(p) => setPage(p)}></PaginationController>
       </div>
     </>
   );

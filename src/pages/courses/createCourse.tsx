@@ -150,7 +150,7 @@ export function CreateCourse() {
                       <FormLabel>Kode Program Studi</FormLabel>
                       <FormControl>
                         <Input
-                          readOnly={true}
+                          // readOnly={true}
                           placeholder="Masukkan Kode Program Studi"
                           {...field}
                         />
