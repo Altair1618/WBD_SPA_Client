@@ -46,9 +46,11 @@ export function Course() {
           }
         });
         const result = await response.json();
+        // console.log(result);
+
         if (result.status === "success") {
-          setTotalPages(result.data.total_page);
-          setTableData(result.data.students);
+          setTotalPages(result.data.students.max_page);
+          setTableData(result.data.students.students);
         }
       } catch (error) {
         console.error(error);
