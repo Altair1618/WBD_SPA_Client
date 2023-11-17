@@ -65,8 +65,12 @@ export function Subscriptions() {
           }
         });
         const result = await response.json();
-        setTotalPages(result.data.maxPage);
-        setTableData(result.data.users);
+        const data: Record<string, any>[] = result.data.list;
+        const totalPages = Math.ceil(data.length / 10);
+        console.log(data);
+
+        setTotalPages(totalPages);
+        setTableData(data.slice((page - 1) * 10, page * 10));
       } catch (error) {
         console.error(error);
         return;
@@ -75,13 +79,13 @@ export function Subscriptions() {
     fetchData();
   }, [refreshKey, page, search]);
 
-  const headers = { id: "ID", username: "Username" };
+  const headers = { userId: "ID", username: "Username" };
   const renderActions = (rowData: Record<string, any>) => (
     <div className="flex px-3 py-1 items-center gap-3">
       <Button
         className="flex w-8 h-8 p-1 justify-center items-center flex-shrink-0 bg-green-500 rounded-xl"
         onClick={() => {
-          approve(rowData.id);
+          approve(rowData.userId);
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
@@ -91,7 +95,7 @@ export function Subscriptions() {
       <Button
         className="flex w-8 h-8 p-1 justify-center items-center flex-shrink-0 bg-red-500 rounded-xl"
         onClick={() => {
-          reject(rowData.id);
+          reject(rowData.userId);
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">

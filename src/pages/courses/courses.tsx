@@ -29,10 +29,10 @@ export function Courses() {
           }
         });
         const result = await response.json();
-        console.log(result);
+        const data: Record<string, any>[] = result.data.courses;
 
-        setCoursesData(result.data.courses);
-        setTotalPages(Math.ceil(result.data.courses.length / 10));
+        setCoursesData(data.slice((page - 1) * 10, page * 10));
+        setTotalPages(Math.ceil(data.length / 10));
       } catch (error) {
         console.error(error);
         return;
