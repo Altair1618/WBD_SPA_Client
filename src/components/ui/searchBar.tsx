@@ -20,9 +20,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onChange, placeholder }) => {
   };
 
   return (
-    <div className='flex justify-between items-start self-stretch rounded-full border-[0.1px] border-solid border-black'>
+    <div className='flex w-full justify-between items-start self-stretch rounded-full border-[0.1px] border-solid border-black'>
       <input
-        className='flex flex-1 pl-4 py-1 rounded-l-full focus:outline-none'
+        className='flex flex-1 pl-4 py-1 h-full rounded-l-full focus:outline-none'
         type="text"
         value={searchTerm}
         onChange={handleInputChange}

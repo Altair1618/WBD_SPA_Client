@@ -32,7 +32,6 @@ export const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    // TODO: Halaman List Subscription Request bagi User (Admin Only)
     path: '/subscriptions',
     element: (
       <ProtectedRoute role={UserTypes.admin}>
@@ -41,7 +40,6 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    // TODO: Halaman List Register Approval Request bagi Pengajar (Admin Only)
     path: '/approvals',
     element: (
       <ProtectedRoute role={UserTypes.admin}>

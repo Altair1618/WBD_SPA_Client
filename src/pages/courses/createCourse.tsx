@@ -172,7 +172,7 @@ export function CreateCourse() {
                 >
                   BUAT
                 </Button>
-              </div>  
+              </div>
             </form>
           </Form>
         </div>
